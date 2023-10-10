@@ -1,20 +1,41 @@
 #include <iostream>
 #include <fstream>
-#include <string>
-
 #include "scuclass.h"
 
-using namespace std;
 using namespace coen79_hw3;
-int main(int argc, char *argv[])
-{
-    scuclass coen79;
-    ifstream data(argv[1]);
+using namespace std;
+
+int main(int argc, char* argv[]) {
+    SCUClass coen79;
     
-    if (data.is_open())
+    ifstream inputFile(argv[0]);
+
+    if (inputFile.is_open())
     {
-        
-        if(getline(data, students[0].name));
-        cout << students[0].name <<endl;
+        while (!inputFile.eof())
+        {
+            string studentID, firstName, lastName;
+
+            inputFile >> studentID >> firstName >> lastName;
+
+            Student student;
+            student.setStudentID(studentID);
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
+
+            coen79.addStudent(student);
+        }
+
+        inputFile.close();
+
+        coen79.list();
     }
+    return 0;
+    // Example:
+    // coen79.addStudent(/* student information here */);
+    // coen79.erase(/* some kinds of ID */);
+    // coen79.list();
+
+    return 0;
 }
+
